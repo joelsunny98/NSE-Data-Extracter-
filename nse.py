@@ -60,15 +60,30 @@ def extract(day):
     print("...DATA EXTRACTION COMPLETE")
     print("Please check the file: data.xlsx")
 
-    #Find the current date
-    now = datetime.now()
-    # Convert data into a format ready to be used in the url
-    today = now.strftime("%d%m%Y")
+#Find the current date
+now = datetime.now()
+# Convert data into a format ready to be used in the url
+today = now.strftime("%d%m%Y")
 
-    try: 
-        extract(today)
-    except:
-        print("There is an error")
+try: 
+    extract(today)
+except urllib.error.HTTPError:
+
+    print("CSV File for today has not been generated yet.")
+    response = input("Do you want the data for yesterday (y/n): ")
+
+    if response.lower() == 'y':
+        previous_date = pre_date()
+        extract(previous_date)
+    else:
+        print("Alright! Try again later in the evening.")
+        print("The NSE Should generate the data for today by then.")
+
+except PermissionError:
+    print("The Data.xlsx file is open")
+    print("Please close it and try again")
+    
+        
 
 
 
