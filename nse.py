@@ -16,3 +16,11 @@ today = now.strftime("%d%m%Y")
 
 #The url is changed according to the day
 new_url = url[0:59] + today + url[67: ]
+
+#CSV file for that day is exctracted
+data = pd.DataFrame(pd.read_csv(new_url))
+#the data already on the excel sheet is extracted
+sheet = pd.DataFrame(pd.read_excel('data.xlsx'))
+
+#The new data is appended to the data on the Excel Sheet
+updated_sheet = sheet.append(data)
