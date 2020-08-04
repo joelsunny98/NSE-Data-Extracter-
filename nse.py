@@ -6,3 +6,13 @@ from datetime import datetime
 from datetime import date
 from datetime import timedelta
 
+#URL for PWOI is initialised
+url = "https://www1.nseindia.com/content/nsccl/fao_participant_oi_08072020.csv"
+
+#find the current date
+now = datetime.now()
+#convert date to a format ready to put into URL
+today = now.strftime("%d%m%Y")
+
+#The url is changed according to the day
+new_url = url[0:59] + today + url[67: ]
